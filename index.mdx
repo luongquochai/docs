@@ -1,97 +1,34 @@
 ---
-title: "Introduction"
-description: "Welcome to the new home for your documentation"
+sidebarTitle: Home
+title: API Lab Documentation
+description: Find user guides, quickstarts, tutorials, use cases, code samples, and more.
 ---
 
-## Setting up
+import { PrimaryButton, HeroCard } from '/snippets/components.mdx';
 
-Get your documentation site up and running in minutes.
+<img className="block dark:hidden" src="/images/hero-light2.png" />
+<img className="hidden dark:block" src="/images/hero-dark2.png" />
 
-<Card
-  title="Start here"
-  icon="rocket"
-  href="/quickstart"
-  horizontal
->
-  Follow our three step quickstart guide.
-</Card>
+**API Lab is a lightweight, web-based API development suite.**
 
-## Make it yours
+It was built from the ground up with ease of use and accessibility in mind providing all the functionality needed for API developers with minimalist, unobtrusive UI.
 
-Design a docs site that looks great and empowers your users.
+<PrimaryButton label="Get started" href="/documentation/getting-started/introduction" />
 
-<Columns cols={2}>
-  <Card
-    title="Edit locally"
-    icon="pen-to-square"
-    href="/development"
-  >
-    Edit your docs locally and preview them in real time.
-  </Card>
-  <Card
-    title="Customize your site"
-    icon="palette"
-    href="/essentials/settings"
-  >
-    Customize the design and colors of your site to match your brand.
-  </Card>
-    <Card
-    title="Set up navigation"
-    icon="map"
-    href="/essentials/navigation"
-  >
-    Organize your docs to help users find what they need and succeed with your product.
-  </Card>
-  <Card
-    title="API documentation"
-    icon="terminal"
-    href="/api-reference/introduction"
-  >
-    Auto-generate API documentation from OpenAPI specifications.
-  </Card>
-</Columns>
+<br />
+<br />
 
-## Create beautiful pages
+**Quick Start**
 
-Everything you need to create world-class documentation.
-
-<Columns cols={2}>
-  <Card
-    title="Write with MDX"
-    icon="pen-fancy"
-    href="/essentials/markdown"
-  >
-    Use MDX to style your docs pages.
-  </Card>
-  <Card
-    title="Code samples"
-    icon="code"
-    href="/essentials/code"
-  >
-    Add sample code to demonstrate how to use your product.
-  </Card>
-  <Card
-    title="Images"
-    icon="image"
-    href="/essentials/images"
-  >
-    Display images and other media.
-  </Card>
-  <Card
-    title="Reusable snippets"
-    icon="recycle"
-    href="/essentials/reusable-snippets"
-  >
-    Write once and reuse across your docs.
-  </Card>
-</Columns>
-
-## Need inspiration?
-
-<Card
-  title="See complete examples"
-  icon="stars"
-  href="https://mintlify.com/customers"
->
-  Browse our showcase of exceptional documentation sites.
-</Card>
+<CardGroup>
+  <HeroCard
+    title="API Lab Cloud"
+    description="Everything you need to get started with API Lab, hosted by us."
+    href="https://app-apilab.viettel.io"
+  />
+  <HeroCard
+    title="API Lab Self-Host"
+    description="Deploy your own instance of API Lab on your own infrastructure."
+    href="/documentation/self-host/getting-started"
+  />
+</CardGroup>

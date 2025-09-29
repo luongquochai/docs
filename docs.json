@@ -90,7 +90,7 @@
   },
   "logo": {
     "light": "/logo/logo-apilab.svg",
-    "dark": "/logo/logo-apilab-dark.png"
+    "dark": "/logo/logo-apilab-dark.svg"
   },
   "navbar": {
     "links": [

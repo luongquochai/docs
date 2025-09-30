@@ -1,0 +1,85 @@
+---
+sidebarTitle: AI Features 
+title: AI Features
+description: Optimize API Development and Testing Workflows with API Lab using AI.
+---
+
+<span style={{ 
+  display: 'inline-block', 
+  border: '1.5px solid #07C983', 
+  color: '#07C983', 
+  fontSize: '0.8rem', 
+  padding: '0.4em 0.5em', 
+  borderRadius: '0.4em', 
+  verticalAlign: 'middle', 
+  backgroundColor: 'transparent', 
+  fontWeight: 'bold' 
+}}>Experimental</span>
+
+API Lab now offers a set of AI-powered features designed to simplify core stages of the API development lifecycle. These include renaming of API requests, generation of structured request payloads, and scripting capabilities for pre-request logic and test cases.
+
+<Warning> These AI features are currently in the `beta` stage and are exclusively available when client setup on `API Key` and `model` in [Settings](/documentation/features/customization#settings) page</Warning>
+
+### Enable AI-powered features
+
+To activate AI-powered features, follow these steps:
+
+1. Open the **Settings** page within the API Lab application.
+2. Open **API Key** and **Model** section.
+3. Enter your **API Key** and **Model** and click on **Save** button.
+
+<Tip> API Lab suggest you to use `gemini-2.0-flash` model for best performance and cost-effective</Tip>
+
+<Tabs>
+<Tab title="API Key">
+<Frame>
+    <img src="/images/apilab/api-key.gif" /> 
+</Frame>
+</Tab>
+</Tabs>
+
+### Rename API Requests
+
+When saving an API request to a collection, click the **Modify with AI** icon **( .⟡⁺ )** next to the request name field to have the system automatically assign a name based on the request's context and properties. Alternatively, you can use this feature to rename the pre-saved requests.
+
+You can even customize the naming convention (e.g., CamelCase, PascalCase) through the **Request Naming Style** dropdown located in the **Experiments** section of the **Settings** page.
+
+### Generate Request Body
+
+Dynamically generate structured request payloads:
+
+1. Click the **Modify with AI** icon **( .⟡⁺ )** in the **Request Body** section.
+2. Define constraints or provide input for the desired structure.
+3. Validate the generated body and select **Accept Change** to populate the request body field.
+
+### Generate Pre-request Scripts
+
+Generate pre-request scripts to handle necessary setup operations before sending the request:
+
+1. Click the **Modify with AI** icon **( .⟡⁺ )** within the **Pre-request Script** section.
+2. Enter specific logic or conditions required for the pre-request phase.
+3. After reviewing the generated script, click **Accept Change** to apply it to the pre-request script section of your API request.
+
+### Generate Scenario Cases
+  
+Build tests cases faster and reduce manual work with AI-Generated Scenario Cases:
+
+1. Click the **Modify with AI** icon **( .⟡⁺ )** in the **All Scenarios** section.
+2. Specify the scenario parameters or expected outcomes.
+3. Select **Accept Change** to integrate it into the scenario script editor for execution.
+
+<Tip> Support the format excel cases and build with your description for each case. Please download template and enjoy !</Tip>
+
+<Tabs>
+<Tab title="AI-Generated Scenario Cases">
+<Frame>
+    <img src="/images/apilab/ai-gen-scenario.gif" /> 
+</Frame>
+</Tab>
+<Tab title="Excel Template AI-Generated Scenario Cases">
+<Frame>
+    <img src="/images/apilab/excel-ai-gen-scenario.gif" /> 
+</Frame>
+</Tab>
+</Tabs>
+

@@ -9,8 +9,8 @@
     "dark": "#0D9373"
   },
   "logo": {
-    "light": "/logo/light.svg",
-    "dark": "/logo/dark.svg"
+    "light": "/logo/apilab-light.svg",
+    "dark": "/logo/apilab-dark.svg"
   },
   "favicon": "/favicon.svg",
   "styling": {
@@ -18,6 +18,9 @@
   },
   "navigation": {
     "anchors": [
+      {
+        "anchor": "Version 1.1.0"
+      },
       {
         "anchor": "Documentation",
         "icon": "lines-leaning",
@@ -44,107 +47,27 @@
                   "documentation/getting-started/rest/pre-request-scripts",
                   "documentation/getting-started/rest/tests"
                 ]
-              },
-              {
-                "group": "GraphQL API",
-                "pages": [
-                  "documentation/getting-started/graphql/creating-a-query",
-                  "documentation/getting-started/graphql/using-variables"
-                ]
-              },
-              {
-                "group": "Realtime API",
-                "pages": [
-                  "documentation/getting-started/realtime/websocket",
-                  "documentation/getting-started/realtime/socket-io",
-                  "documentation/getting-started/realtime/sse",
-                  "documentation/getting-started/realtime/mqtt"
-                ]
-              }
-            ]
-          },
-          {
-            "group": "Clients",
-            "pages": [
-              "documentation/clients/web",
-              "documentation/clients/desktop",
-              {
-                "group": "CLI",
-                "pages": [
-                  "documentation/clients/cli/overview",
-                  "documentation/clients/cli/troubleshooting"
-                ]
               }
             ]
           },
           {
             "group": "Protocols",
             "pages": [
-              "documentation/protocols/rest",
-              "documentation/protocols/graphql",
-              "documentation/protocols/realtime"
+              "documentation/protocols/rest"
             ]
           },
           {
             "group": "Features",
             "pages": [
+              "documentation/features/ai-features",
               "documentation/features/workspaces",
               "documentation/features/collections",
-              "documentation/features/runner",
               "documentation/features/variables",
               "documentation/features/environments",
-              "documentation/features/pat",
-              "documentation/features/history",
-              "documentation/features/spotlight",
-              "documentation/features/shortcuts",
-              "documentation/features/scripts",
               "documentation/features/importer",
               "documentation/features/customization",
-              "documentation/features/inspections",
-              "documentation/features/cookies",
-              "documentation/features/client-certificate",
-              "documentation/features/snippets",
-              "documentation/features/interceptor",
               "documentation/features/context-menu",
-              "documentation/features/widgets",
-              "documentation/features/authorization",
-              "documentation/features/ai-features",
-              "documentation/features/rest-api-testing",
-              "documentation/features/graphql-api-testing",
-              "documentation/features/realtime-api-testing"
-            ]
-          },
-          {
-            "group": "Self-Host",
-            "pages": [
-              "documentation/self-host/getting-started",
-              {
-                "group": "Community Edition",
-                "pages": [
-                  "documentation/self-host/community-edition/getting-started",
-                  "documentation/self-host/community-edition/prerequisites",
-                  "documentation/self-host/community-edition/install-and-build",
-                  "documentation/self-host/community-edition/setup-and-access",
-                  "documentation/self-host/community-edition/admin-dashboard",
-                  "documentation/self-host/community-edition/deploy-and-upgrade",
-                  "documentation/self-host/community-edition/telemetry"
-                ]
-              },
-              {
-                "group": "Enterprise Edition",
-                "pages": [
-                  "documentation/self-host/enterprise-edition/getting-started",
-                  "documentation/self-host/enterprise-edition/prerequisites",
-                  "documentation/self-host/enterprise-edition/install-and-build",
-                  "documentation/self-host/enterprise-edition/setup-and-access",
-                  "documentation/self-host/enterprise-edition/admin-dashboard",
-                  "documentation/self-host/enterprise-edition/user-provisioning",
-                  "documentation/self-host/enterprise-edition/activity-logs",
-                  "documentation/self-host/enterprise-edition/user-groups",
-                  "documentation/self-host/enterprise-edition/deploy-and-upgrade",
-                  "documentation/self-host/enterprise-edition/telemetry"
-                ]
-              }
+              "documentation/features/rest-api-testing"
             ]
           },
           {
@@ -152,9 +75,7 @@
             "pages": [
               "documentation/community",
               "documentation/contributors",
-              "documentation/changelog",
-              "documentation/develop",
-              "documentation/i18n"
+              "documentation/changelog"
             ]
           }
         ]
@@ -172,8 +93,7 @@
             "pages": [
               "guides/articles",
               "guides/articles/restful-api-testing-with-apilab",
-              "guides/articles/improving-your-api-workflow",
-              "guides/articles/uplifting-web-experience-with-apilab-widgets"
+              "guides/articles/improving-your-api-workflow"
             ]
           }
         ]
@@ -211,17 +131,17 @@
       },
       {
         "anchor": "Download",
-        "href": "https://apilab.com/download",
+        "href": "https://s.dpway.io/apilab",
         "icon": "angles-down"
       },
       {
         "anchor": "Blog",
-        "href": "https://apilab.com/blog",
+        "href": "https://s.dpway.io/apilab",
         "icon": "quote-left"
       },
       {
         "anchor": "Changelog",
-        "href": "https://github.com/apilab/apilab/releases",
+        "href": "https://github.com/luongquochai/apilab/releases",
         "icon": "shapes"
       }
     ]
@@ -229,14 +149,14 @@
   "navbar": {
     "primary": {
       "type": "github",
-      "href": "https://github.com/apilab/apilab"
+      "href": "https://github.com/luongquochai/apilab"
     }
   },
   "footer": {
     "socials": {
-      "discord": "https://apilab.io/discord",
-      "x": "https://apilab.io/twitter",
-      "linkedin": "https://www.linkedin.com/company/apilab/"
+      "discord": "https://s.dpway.io/apilab/discord",
+      "x": "https://s.dpway.io/apilab/twitter",
+      "linkedin": "https://www.linkedin.com/in/luongquochai/"
     }
   },
   "search": {

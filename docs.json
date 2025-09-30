@@ -116,16 +116,6 @@
               "support/solutions/community",
               "support/solutions/experts"
             ]
-          },
-          {
-            "group": "Resources",
-            "pages": [
-              "support/license",
-              "support/code-of-conduct",
-              "support/security-policy",
-              "support/privacy",
-              "support/terms"
-            ]
           }
         ]
       },
@@ -154,8 +144,8 @@
   },
   "footer": {
     "socials": {
-      "discord": "https://s.dpway.io/apilab/discord",
-      "x": "https://s.dpway.io/apilab/twitter",
+      "discord": "https://s.dpway.io/apilab/",
+      "x": "https://s.dpway.io/apilab/",
       "linkedin": "https://www.linkedin.com/in/luongquochai/"
     }
   },

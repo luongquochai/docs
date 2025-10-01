@@ -126,8 +126,16 @@
       },
       {
         "anchor": "Blog",
-        "href": "https://s.dpway.io/apilab",
-        "icon": "quote-left"
+        "icon": "quote-left",
+        "groups": [
+          {
+            "group": "Blog",
+            "pages": [
+              "blog/apilab-v1.1.0",
+              "blog/apilab-v1.0.0"
+            ]
+          }
+        ]
       },
       {
         "anchor": "Changelog",

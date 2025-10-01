@@ -86,7 +86,9 @@
         "groups": [
           {
             "group": "Getting started",
-            "pages": ["guides/getting-started/introduction"]
+            "pages": [
+              "guides/getting-started/introduction"
+            ]
           },
           {
             "group": "Articles",

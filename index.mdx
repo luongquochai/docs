@@ -4,10 +4,10 @@ title: API Lab Documentation
 description: Find user guides, quickstarts, tutorials, use cases, code samples, and more.
 ---
 
-import { PrimaryButton, HeroCard } from '/snippets/components.mdx';
+import { PrimaryButton } from '/snippets/components.mdx';
 
-<img className="block dark:hidden" src="/images/apilab-light.png" />
-<img className="hidden dark:block" src="/images/apilab-dark.png" />
+<img className="block dark:hidden" src="/images/hero-apilab-light.png" />
+<img className="hidden dark:block" src="/images/hero-apilab-dark.png" />
 
 **API Lab is a lightweight, web-based API development suite.**
 
@@ -21,14 +21,20 @@ It was built from the ground up with ease of use and accessibility in mind provi
 **Quick Start**
 
 <CardGroup>
-  <HeroCard
-    title="API Lab Cloud"
-    description="Everything you need to get started with API Lab, hosted by us."
-    href="https://s.dpway.io/apilab"
-  />
-  <HeroCard
-    title="API Lab Self-Host"
-    description="Deploy your own instance of API Lab on your own infrastructure."
+  <Card
+    title="Open API Lab"
+    href="https://app.apilab.work"
+  >
+    <sub>
+      Access the web-based API development suite.
+    </sub>
+  </Card>
+  <Card
+    title="Install API Lab"
     href="/documentation/self-host/getting-started"
-  />
+    >
+      <sub>
+        Deploy API Lab on your own infrastructure.
+      </sub>
+    </Card>
 </CardGroup>

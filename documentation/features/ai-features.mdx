@@ -18,25 +18,15 @@ description: Optimize API Development and Testing Workflows with API Lab using A
 
 API Lab now offers a set of AI-powered features designed to simplify core stages of the API development lifecycle. These include renaming of API requests, generation of structured request payloads, and scripting capabilities for pre-request logic and test cases.
 
-<Warning> These AI features are currently in the `beta` stage and are exclusively available when client setup on `API Key` and `model` in [Settings](/documentation/features/customization#settings) page</Warning>
+<Warning> These AI features are currently in the `alpha` stage and are exclusively available on [API Lab Cloud](https://app.apilab.work) and our [Desktop app](https://hoppscotch.com/download). They are **NOT** supported in the Self-Hosted Edition at this time. </Warning>
 
 ### Enable AI-powered features
 
 To activate AI-powered features, follow these steps:
 
 1. Open the **Settings** page within the API Lab application.
-2. Open **API Key** and **Model** section.
-3. Enter your **API Key** and **Model** and click on **Save** button.
-
-<Tip> API Lab suggest you to use `gemini-2.0-flash` model for best performance and cost-effective</Tip>
-
-<Tabs>
-<Tab title="API Key">
-<Frame>
-    <img src="/images/apilab/api-key.gif" /> 
-</Frame>
-</Tab>
-</Tabs>
+2. Scroll to the **Experiments** section.
+3. Toggle the **AI Experiments** option to enable the features.
 
 ### Rename API Requests
 
@@ -60,26 +50,10 @@ Generate pre-request scripts to handle necessary setup operations before sending
 2. Enter specific logic or conditions required for the pre-request phase.
 3. After reviewing the generated script, click **Accept Change** to apply it to the pre-request script section of your API request.
 
-### Generate Scenario Cases
-  
-Build tests cases faster and reduce manual work with AI-Generated Scenario Cases:
+### Generate Test Scripts
 
-1. Click the **Modify with AI** icon **( .⟡⁺ )** in the **All Scenarios** section.
-2. Specify the scenario parameters or expected outcomes.
-3. Select **Accept Change** to integrate it into the scenario script editor for execution.
+Develop test cases for your API workflow:
 
-<Tip> Support the format excel cases and build with your description for each case. Please download template and enjoy !</Tip>
-
-<Tabs>
-<Tab title="AI-Generated Scenario Cases">
-<Frame>
-    <img src="/images/apilab/ai-gen-scenario.gif" /> 
-</Frame>
-</Tab>
-<Tab title="Excel Template AI-Generated Scenario Cases">
-<Frame>
-    <img src="/images/apilab/excel-ai-gen-scenario.gif" /> 
-</Frame>
-</Tab>
-</Tabs>
-
+1. Click the **Modify with AI** icon **( .⟡⁺ )** in the **Tests** section.
+2. Specify the test parameters or expected outcomes.
+3. Select **Accept Change** to integrate it into the test script editor for execution.

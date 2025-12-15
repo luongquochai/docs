@@ -1,7 +1,7 @@
 {
   "$schema": "https://mintlify.com/docs.json",
   "theme": "mint",
-  "name": "API Lab Docs",
+  "name": "API Lab Documentation",
   "description": "Find user guides, quickstarts, tutorials, use cases, code samples, and more.",
   "colors": {
     "primary": "#0D9373",
@@ -18,9 +18,6 @@
   },
   "navigation": {
     "anchors": [
-      {
-        "anchor": "Version 1.1.0"
-      },
       {
         "anchor": "Documentation",
         "icon": "lines-leaning",
@@ -51,6 +48,12 @@
             ]
           },
           {
+            "group": "Clients",
+            "pages": [
+              "documentation/clients/web"
+            ]
+          },
+          {
             "group": "Protocols",
             "pages": [
               "documentation/protocols/rest"
@@ -59,15 +62,37 @@
           {
             "group": "Features",
             "pages": [
-              "documentation/features/ai-features",
               "documentation/features/workspaces",
               "documentation/features/collections",
+              "documentation/features/runner",
               "documentation/features/variables",
               "documentation/features/environments",
+              "documentation/features/pat",
+              "documentation/features/history",
+              "documentation/features/spotlight",
+              "documentation/features/shortcuts",
+              "documentation/features/scripts",
               "documentation/features/importer",
               "documentation/features/customization",
+              "documentation/features/inspections",
+              "documentation/features/cookies",
+              "documentation/features/client-certificate",
+              "documentation/features/snippets",
+              "documentation/features/interceptor",
               "documentation/features/context-menu",
+              "documentation/features/widgets",
+              "documentation/features/authorization",
+              "documentation/features/ai-features",
+              "documentation/features/mock",
+              "documentation/features/documentation",
               "documentation/features/rest-api-testing"
+            ]
+          },
+          {
+            "group": "Self-Host",
+            "pages": [
+              "documentation/self-host/getting-started",
+              "documentation/self-host/install-and-build"
             ]
           },
           {
@@ -75,7 +100,9 @@
             "pages": [
               "documentation/community",
               "documentation/contributors",
-              "documentation/changelog"
+              "documentation/changelog",
+              "documentation/develop",
+              "documentation/i18n"
             ]
           }
         ]
@@ -94,8 +121,14 @@
             "group": "Articles",
             "pages": [
               "guides/articles",
-              "guides/articles/restful-api-testing-with-apilab",
-              "guides/articles/improving-your-api-workflow"
+              "guides/articles/set-up-opentelemetry-stack-with-docker",
+              "guides/articles/audit-logs",
+              "guides/articles/restful-api-testing-with-hoppscotch",
+              "guides/articles/understanding-graphql",
+              "guides/articles/improving-your-api-workflow",
+              "guides/articles/uplifting-web-experience-with-hoppscotch-widgets",
+              "guides/articles/self-host-hoppscotch-on-your-own-servers",
+              "guides/articles/manage-an-enterprise-license-key"
             ]
           }
         ]
@@ -118,26 +151,23 @@
               "support/solutions/community",
               "support/solutions/experts"
             ]
-          }
-        ]
-      },
-      {
-        "anchor": "Download",
-        "href": "https://s.dpway.io/apilab",
-        "icon": "angles-down"
-      },
-      {
-        "anchor": "Blog",
-        "icon": "quote-left",
-        "groups": [
+          },
           {
-            "group": "Blog",
+            "group": "Resources",
             "pages": [
-              "blog/apilab-v1.1.0",
-              "blog/apilab-v1.0.0"
+              "support/license",
+              "support/code-of-conduct",
+              "support/security-policy",
+              "support/privacy",
+              "support/terms"
             ]
           }
         ]
+      },
+      {
+        "anchor": "Blog",
+        "href": "https://apilab.work/blog",
+        "icon": "quote-left"
       },
       {
         "anchor": "Changelog",
@@ -154,8 +184,8 @@
   },
   "footer": {
     "socials": {
-      "discord": "https://s.dpway.io/apilab/",
-      "x": "https://s.dpway.io/apilab/",
+      "discord": "https://apilab.work",
+      "x": "https://apilab.work",
       "linkedin": "https://www.linkedin.com/in/luongquochai/"
     }
   },

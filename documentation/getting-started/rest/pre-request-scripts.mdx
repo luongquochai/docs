@@ -24,34 +24,16 @@ You can use the pre-request script for a pre-processing task such as:
 - Adding body data.
 - Adding variable values.
 - Including timestamps in request headers.
-- Support random values.
-
-<Tip> 
-  API Lab supports **Visual Mode** for creating pre-request scripts for better user experience without the need to write code.
-</Tip>
 
 ## Writing pre-request scripts
 
-API Lab provides a special `pm` object containing various methods to create scripts and tests. The `pm` object is global and can be referenced by name to access methods.
+API Lab provides a special `pw` object containing various methods to create scripts and tests. The `pw` object is global and can be referenced by name to access methods.
 
-For example, to set an environment variable, you can use the `pm.environment.set()` method.
-
-
-
-<Tabs>
-<Tab title="JavaScript">
+For example, to set an environment variable, you can use the `pw.env.set()` method.
 
 ```javascript
-pm.environment.set("variable", "value");
+pw.env.set("variable", "value");
 ```
-
-</Tab>
-<Tab title = "Visual Mode">
-<Frame>
-    <img src="/images/apilab/pre-script-light.png" /> 
-</Frame>
-</Tab>
-</Tabs>
 
 ## Examples
 
@@ -59,25 +41,16 @@ Let us look at some examples of how you can use API Lab to write pre-request scr
 
 ### Setting environment variables
 
-`pm.environment.set()` can be used directly for quick and convenient environment variable definition. It can be used to better organize request codes.
+`pw.env.set()` can be used directly for quick and convenient environment variable definition. It can be used to better organize request codes.
 
-<Tabs>
-<Tab title="JavaScript">
 ```javascript
-pm.environment.set("baseURL", "https://httpbin.org");
-pm.environment.set("method", "get");
+pw.env.set("baseURL", "https://httpbin.org");
+pw.env.set("method", "get");
 ```
 
-</Tab>
-<Tab title="Visual Mode">
-<Frame>
-    <img src="/images/apilab/pre-script-light-2.png" /> 
-</Frame>
-</Tab>
-</Tabs>
 Goto the pre-request script tab and copy-paste the above [ECMAScript](https://tc39.es/ecma262) code as shown below:
 
-These variables can be accessed in the request section by referencing them in double angle brackets `{{$randomString}}`. So the URL will be `{{baseURL}}/{{method}}`.
+These variables can be accessed in the request section by referencing them in double angle brackets `<<variable_name>>`. So the URL will be `<<baseURL>>/<<method>>`.
 
 ### Generating random Values to test API
 
@@ -85,17 +58,17 @@ Let us take a case where we need to test random test-user data available at an e
 
 Let us use the following GET API endpoint `https://reqres.in/api/users/`.
 
-Add `{{$randomString}}` to the endpoint URL.
+Add `<<randomValue>>` to the endpoint URL.
 
 ```
-https://reqres.in/api/users/{{$randomString}}
+https://reqres.in/api/users/<<randomValue>>
 ```
 
 Now in the pre-request script tab add the following logic.
 
 ```javascript
 var random = Math.floor(Math.random() * 10);
-pm.environment.set("randomString", random.toString());
+pw.env.set("randomValue", random.toString());
 ```
 
 The [ECMAScript](https://tc39.es/ecma262) code will assign a random number to the environment variable `randomValue` and the API will return a random user associated with the random value.
@@ -117,32 +90,3 @@ You will get a similar response as shown below:
   }
 }
 ```
-
-### Adding variable from Environment to test API
-
-Let us take a case where we need to test the API with a variable from the environment.
-
-Let us use the following GET API endpoint `https://httpbin.org/get`.
-
-Add `{{$baseURL}}` to the endpoint URL.
-
-```
-https://httpbin.org/get/{{$baseURL}}
-```
-
-<Tabs>
-<Tab title="JavaScript">
-```javascript
-pm.environment.set("baseURL", "https://httpbin.org");
-pm.environment.set("method", "get");
-```
-
-</Tab>
-<Tab title="Visual Mode">
-<Frame>
-    <img src="/images/apilab/pre-script-env.gif" /> 
-</Frame>
-</Tab>
-</Tabs>
-
-

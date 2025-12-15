@@ -8,20 +8,22 @@ Import data from other tools into API Lab. You can import data from the followin
 
 | Service            | Collections                                         | Environments |
 | ------------------ | --------------------------------------------------- | ------------ |
+| **API Lab**     | ✓                                                   | ✓            |
 | **Postman**        | ✓                                                   | ✓            |
+| **Insomnia**       | ✓                                                   | ✓            |
 | **OpenAPI**        | ✓                                                   |              |
 | **HTTP Archive**   | ✓                                                   |              |
 | **Other services** | [Contact support](/support/getting-started/contact) |              |
 
-{/* <Note> The size limit for importing collections varies by API Lab edition. In **API Lab Cloud**, you can import collections up to **10 MB**, while **Self-Hosted editions** allow imports of up to **50 MB**. </Note> */}
-{/* 
+<Note> The size limit for importing collections varies by API Lab edition. In **API Lab Cloud**, you can import collections up to **10 MB**, while **Self-Hosted editions** allow imports of up to **50 MB**. </Note>
+
 ## Import from API Lab
 
 1. Export your API Lab collection/environment to a JSON file.
 2. Open API Lab and click on the "**Import**" button on the collection/environment section.
 3. Click on the "**Import from API Lab**" tab.
 4. Click on the "**Choose file**" button and select the JSON file you exported in step 1.
-5. Click on the "**Import**" button. */}
+5. Click on the "**Import**" button.
 
 ## Import from Personal and other workspaces
 
@@ -45,9 +47,25 @@ Import data from other tools into API Lab. You can import data from the followin
 4. Click on the "**Choose file**" button and select the JSON file you exported in step 1.
 5. Click on the "**Import**" button.
 
+<Info>
+  **Experimental Script Import:** When importing Postman collections (v2.0/v2.1), API Lab can now import pre-request scripts and test scripts as an experimental feature. You'll be prompted to consent to this import during the process. This enables seamless migration of your existing Postman workflows including their scripting logic with Chai.js-powered assertions through the `pm` namespace compatibility layer.
+</Info>
+
 ### <Icon icon="download" iconType="solid" />  What's Imported
-- **Collections:** Query parameters from Postman are imported as request parameters and path parameters are imported as request variables. Request bodies, headers, and basic authorization are also imported. Pre-request scripts, test cases, Advanced authorization setups, and collection-level settings aren't imported.
+- **Collections:** Query parameters from Postman are imported as request parameters and path parameters are imported as request variables. Request bodies, headers, and basic authorization are also imported. **Pre-request scripts and test cases** can now be imported (experimental, requires consent). Advanced authorization setups and collection-level settings aren't imported.
 - **Environments:** Imports both regular and secret environment variables directly.
+
+## Import from Insomnia
+
+1. Export your Insomnia collection/environment to a JSON file.
+2. Open API Lab and click on the "**Import**" button on the collection/environment section.
+3. Click on the "**Import from Insomnia**" tab.
+4. Click on the "**Choose file**" button and select the JSON file you exported in step 1.
+5. Click on the "**Import**" button.
+
+### <Icon icon="download" iconType="solid" />  What's Imported
+- **Collections:** Request details like query parameters are imported as request parameters, and path parameters are imported as request variables. Request bodies, headers, and basic authorization settings are also imported. However, other sections like scripts, tests, and advanced authorization methods aren't synced.
+- **Environments:** Regular environment variables are imported.
 
 ## Import from OpenAPI
 
@@ -61,7 +79,7 @@ There are two ways to import OpenAPI collections into API Lab:
 5. Click on the "**Choose file**" button and select the JSON file you exported in step 1.
 6. Click on the "**Import**" button.
 
-### 2. Import from URL *`(coming soon)`*
+### 2. Import from URL
 1. Copy the URL of your OpenAPI specification.
 2. Open API Lab and click on the "**Import**" button on the collection section.
 3. Click on the "**Import from OpenAPI**" tab.
@@ -72,7 +90,7 @@ There are two ways to import OpenAPI collections into API Lab:
 ### <Icon icon="download" iconType="solid" />  What's Imported
 - **Collections:** Query parameters are imported as request parameters, and path parameters are imported as request variables. Authorization methods, headers, and response examples are also included. However, details like request bodies, scripts, and tests aren't imported.
 
-## Import from HAR *`(coming soon)`*
+## Import from HAR
 
 1. Export the HTTP Archive (HAR) file from your browser or network monitoring tool.
 2. Open API Lab and click on the "**Import**" button on the collection section.
@@ -83,11 +101,11 @@ There are two ways to import OpenAPI collections into API Lab:
 ### <Icon icon="download" iconType="solid" />  What's Imported
 - **Collections:** Imports request headers and body content. Additional metadata or settings aren't included in this format.
 
-## Import from other services *`(coming soon)`*
+## Import from other services
 
 - If you want to import data from other services, please [contact support](/support/getting-started/contact) and we will help you out.
 
-### Import from cURL *`(coming soon)`*
+### Import from cURL
 
 You can import cURL commands into API Lab in the following ways:
 

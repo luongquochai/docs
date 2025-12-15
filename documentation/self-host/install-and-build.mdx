@@ -1,0 +1,206 @@
+---
+sidebarTitle: Install and build
+title: Install and build
+description: Learn how to install and build API Lab.
+---
+
+## Configuring the environment
+
+Before you get started with the installation, you need to configure the environment variables. Create a `.env` file in the root directory of the project and add the following environment variables:
+
+<Warning>**<u>Ensure that the environment values are not enclosed within quotes [""].</u>**</Warning>
+
+```yaml
+#-----------------------Backend Config------------------------------#
+
+# Prisma Config
+DATABASE_URL=postgresql://username:password@url:5432/dbname # or replace with your database URL
+
+# (Optional) By default, the AIO container (when in subpath access mode) exposes the endpoint on port 80. Use this setting to specify a different port if needed.
+HOPP_AIO_ALTERNATE_PORT=80
+
+# Sensitive Data Encryption Key while storing in Database (32 character)
+DATA_ENCRYPTION_KEY=********************************
+
+# Whitelisted origins for the API Lab App.
+# This list controls which origins can interact with the app through cross-origin comms.
+WHITELISTED_ORIGINS=http://localhost:3170,http://localhost:3000,http://localhost:3100,app://hoppscotch
+
+#-----------------------Frontend Config------------------------------#
+
+# Base URLs
+VITE_BASE_URL=http://localhost:3000
+VITE_SHORTCODE_BASE_URL=http://localhost:3000
+VITE_ADMIN_URL=http://localhost:3100
+
+# Backend URLs
+VITE_BACKEND_GQL_URL=http://localhost:3170/graphql
+VITE_BACKEND_WS_URL=wss://localhost:3170/graphql
+VITE_BACKEND_API_URL=http://localhost:3170/v1
+
+# Terms Of Service And Privacy Policy Links (Optional)
+VITE_APP_TOS_LINK=https://docs.app.apilab.work/support/terms
+VITE_APP_PRIVACY_POLICY_LINK=https://docs.app.apilab.work/support/privacy
+
+# Set to `true` for subpath based access
+ENABLE_SUBPATH_BASED_ACCESS=false
+```
+
+Let's understand the major environment variables:
+
+1. `DATABASE_URL`: This is where you add your Postgres database URL.
+2. `HOPP_AIO_ALTERNATE_PORT`: This is an optional variable that lets you specify an alternate port for the AIO container's endpoint when operating in subpath access mode. By default, this endpoint is exposed on port 80.
+3. `DATA_ENCRYPTION_KEY`: A 32-character key used for encrypting sensitive data stored in the database.
+4. `WHITELISTED_ORIGINS`: URLs of API Lab backend, admin dashboard, frontend app that are allowed to interact.
+5. `VITE_BASE_URL`: This is the URL where your deployment will be accessible from.
+6. `VITE_SHORTCODE_BASE_URL`: A URL to generate shortcodes for sharing, can be the same as `VITE_BASE_URL`.
+7. `VITE_BACKEND_GQL_URL`: The URL for GraphQL within the instance.
+8. `VITE_BACKEND_WS_URL`: The URL for WebSockets within the instance.
+9. `VITE_BACKEND_API_URL`: The URL for REST APIs within the instance.
+10. `VITE_APP_TOS_LINK` and `VITE_APP_PRIVACY_POLICY_LINK` are optional and are used to configure the links to the Terms & Conditions and Privacy Policy.
+
+## Docker
+
+Once the environment variables are configured, you may proceed to the next step of setting up the API Lab instance. Currently, there are two ways to set up API Lab:
+
+1. Using individual containers for the services.
+2. Using the AIO container.
+
+- Before proceeding further, ensure that you have a running instance of Postgres.
+
+### Using individual containers for the services
+
+To self-host API Lab, you will need the following services running via Docker:
+
+- API Lab frontend
+- API Lab backend
+- API Lab admin dashboard
+
+Pull the containers from DockerHub with the following command:
+
+```bash
+docker pull hoppscotch/hoppscotch-frontend
+docker pull hoppscotch/hoppscotch-backend
+docker pull hoppscotch/hoppscotch-admin
+```
+
+After pulling the containers, start API Lab by running all three services:
+
+```bash
+docker run -p 3000:3000 --env-file .env --restart unless-stopped hoppscotch/hoppscotch-frontend
+docker run -p 3170:3170 --env-file .env --restart unless-stopped hoppscotch/hoppscotch-backend
+docker run -p 3100:3100 --env-file .env --restart unless-stopped hoppscotch/hoppscotch-admin
+```
+
+<Tip>Ensure that the environment variables are configured in the `.env` file and the restart policy is mentioned.</Tip>
+
+Open [admin dashboard](http://localhost:3100) or [`PORT 3100`](http://localhost:3100) in the browser to setup and access the API Lab instance.
+
+### Using the AIO container
+
+The All-In-One (AIO) container is a single container that provides all the services required to run API Lab.
+
+Pull the container from DockerHub with the following command:
+
+```bash
+docker pull hoppscotch/hoppscotch
+```
+
+After pulling the container, start API Lab by running the container:
+
+```bash
+docker run -p 3000:3000 -p 3100:3100 -p 3170:3170 --env-file .env --restart unless-stopped hoppscotch/hoppscotch
+```
+
+<Tip>Ensure that the environment variables are configured in the `.env` file and the restart policy is mentioned.</Tip>
+
+Open [admin dashboard](http://localhost:3100) or [`PORT 3100`](http://localhost:3100) in the browser to setup and access the API Lab instance.
+
+## Subpath Based Access
+
+To enable subpath based access the following `.env` variable must be set to true, it is set to false by default.
+
+```
+ENABLE_SUBPATH_BASED_ACCESS=true
+```
+
+When set to true the following is the expected behavior:
+
+### Using individual containers for the services
+
+When using the individual containers it is up to the users to configure a reverse proxy to allow requests made to a specific route to be rerouted to the relevant containers.
+
+### Using the AIO container
+
+When using AIO, when subpath access is set to true the services can be accessed from the following routes
+
+| Service              | Route      |
+| -------------------- | ---------- |
+| API Lab App       | `/`        |
+| API Lab Admin App | `/admin`   |
+| API Lab Backend   | `/backend` |
+
+<Warning>
+By default, the AIO container exposes the app on port 80. This can cause conflicts if you're running on a host system where
+port 80 is privileged, such as with Rootless Docker, Podman, or hardened environments like OpenShift. If you experience issues on these setups, try setting `HOPP_AIO_ALTERNATE_PORT` to bind the app to a non-privileged port.
+</Warning>
+
+## Migrations
+
+Once the instance of API Lab is up, you need to run migrations on the database to ensure that it has the relevant tables. Depending on how API Lab was set up, the method to run the migrations changes.
+
+### Using individual containers for the services
+
+Run the following command to copy the ID of the **backend container**:
+
+```bash
+docker ps
+```
+
+### Using the AIO container
+
+Run the following command to copy the ID of the **AIO container**:
+
+```bash
+docker ps
+```
+
+### Running migrations
+
+Once the respective container ID is copied, execute the following command to open an interactive shell within the container to execute the migration command:
+
+```bash
+docker exec -it <container_id> /bin/sh
+```
+
+Once inside the container, run the migration using:
+
+```bash
+pnpm exec prisma migrate deploy
+```
+
+Should the user ever encounter the following error:
+
+```bash
+Database migration not found. Please check the documentation for assistance: https://docs.app.apilab.work/documentation/self-host/install-and-build#running-migrations
+```
+
+It means the user is trying to start the backend (or AIO) service before the database has all the relevant tables in it. In order to run the migration to populate the database run the following command.
+
+```bash
+docker run -it --entrypoint sh --env-file .env <container_name>
+```
+
+Making sure to pass in the `.env` file containing the right `.env` variables for the instance. On executing the aforementioned command will result in a shell being opened inside a instance of the container following which user can execute a database migration normally with
+
+```bash
+pnpm exec prisma migrate deploy
+```
+
+Once the database has been successfully run and the database populated with tables the backend containers ( or AIO container) can be started normally.
+
+Note: If user is using `docker compose` to run the services the following command can be used to open a shell inside the backend (or AIO) service.
+
+```bash
+docker compose run --entrypoint sh <Service_name>
+```

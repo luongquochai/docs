@@ -1,0 +1,1328 @@
+---
+sidebarTitle: Scripts
+title: Scripts
+description: Write pre-request scripts and build tests.
+---
+
+<Tabs>
+    <Tab title="hopp [Experimental]">
+    <Danger>
+      It is not recommended to migrate or reformat your existing scripts to the new scripting APIs at this time. Upcoming updates are expected to introduce breaking changes as we continue to refine and improve the scripting experience.
+
+      The current rollout is intentionally gradual, allowing us to gather user feedback and iterate based on real-world usage.
+
+      All further updates to scripting will be scoped to the experimental scripting sandbox, which is the default, and the preference can be updated from `Settings → Experiments`.
+
+      [Your feedback will be invaluable as we shape the next generation of API Lab scripting.](https://github.com/hoppscotch/hoppscotch/discussions/5221)
+    </Danger>
+
+    <Note>
+      This new experimental implementation provides a robust foundation for API scripting with enhanced capabilities for environment management, request manipulation, response processing, cookie handling, and comprehensive testing. The new system maintains backwards compatibility while introducing powerful new features for modern API testing workflows.
+    </Note>
+
+    ## `hopp.env` Namespace
+
+    Environment variable management with scope-specific operations and enhanced functionality.
+
+    ### `hopp.env.get(key: string)`
+
+    Retrieves the value of the selected environment's variable. Accepts an environment variable as an argument.
+
+    ```javascript
+    hopp.env.get("variable");
+    hopp.env.get("baseURL");
+    ```
+
+    ### `hopp.env.getRaw(key: string)`
+
+    Retrieves the raw value of the selected environment's variable without variable resolution.
+
+    ```javascript
+    hopp.env.getRaw("variable");
+    ```
+
+    ### `hopp.env.set(key: string, value: string)`
+
+    Sets the value of an environment variable in the selected environment.
+
+    ```javascript
+    hopp.env.set("baseURL", "https://httpbin.org");
+    ```
+
+    ### `hopp.env.delete(key: string)`
+
+    Deletes an environment variable from the selected environment.
+
+    ```javascript
+    hopp.env.delete("baseURL");
+    ```
+
+    ### `hopp.env.reset(key: string)`
+
+    Resets an environment variable to its initial value in the selected environment.
+
+    ```javascript
+    hopp.env.reset("baseURL");
+    ```
+
+    ### `hopp.env.getInitialRaw(key: string)`
+
+    Retrieves the initial raw value of an environment variable.
+
+    ```javascript
+    hopp.env.getInitialRaw("baseURL");
+    ```
+
+    ### `hopp.env.setInitial(key: string, value: string)`
+
+    Sets the initial value of an environment variable.
+
+    ```javascript
+    hopp.env.setInitial("baseURL", "https://httpbin.org");
+    ```
+
+    #### Active Environment Scope
+
+    Operations specific to the currently active environment.
+
+    ### `hopp.env.active.get(key: string)`
+
+    Retrieves the value of the active environment's variable.
+
+    ```javascript
+    hopp.env.active.get("variable");
+    ```
+
+    ### `hopp.env.active.getRaw(key: string)`
+
+    Retrieves the raw value of the active environment's variable.
+
+    ```javascript
+    hopp.env.active.getRaw("variable");
+    ```
+
+    ### `hopp.env.active.set(key: string, value: string)`
+
+    Sets the value of an active environment variable.
+
+    ```javascript
+    hopp.env.active.set("baseURL", "https://httpbin.org");
+    ```
+
+    ### `hopp.env.active.delete(key: string)`
+
+    Deletes a variable from the active environment.
+
+    ```javascript
+    hopp.env.active.delete("baseURL");
+    ```
+
+    ### `hopp.env.active.reset(key: string)`
+
+    Resets a variable in the active environment to its initial value.
+
+    ```javascript
+    hopp.env.active.reset("baseURL");
+    ```
+
+    ### `hopp.env.active.getInitialRaw(key: string)`
+
+    Retrieves the initial raw value of an active environment variable.
+
+    ```javascript
+    hopp.env.active.getInitialRaw("baseURL");
+    ```
+
+    ### `hopp.env.active.setInitial(key: string, value: string)`
+
+    Sets the initial value of an active environment variable.
+
+    ```javascript
+    hopp.env.active.setInitial("baseURL", "https://httpbin.org");
+    ```
+
+    #### Global Environment Scope
+
+    Operations specific to the global environment.
+
+    ### `hopp.env.global.get(key: string)`
+
+    Retrieves the value of the global environment's variable.
+
+    ```javascript
+    hopp.env.global.get("variable");
+    ```
+
+    ### `hopp.env.global.getRaw(key: string)`
+
+    Retrieves the raw value of the global environment's variable.
+
+    ```javascript
+    hopp.env.global.getRaw("variable");
+    ```
+
+    ### `hopp.env.global.set(key: string, value: string)`
+
+    Sets the value of a global environment variable.
+
+    ```javascript
+    hopp.env.global.set("baseURL", "https://httpbin.org");
+    ```
+
+    ### `hopp.env.global.delete(key: string)`
+
+    Deletes a variable from the global environment.
+
+    ```javascript
+    hopp.env.global.delete("baseURL");
+    ```
+
+    ### `hopp.env.global.reset(key: string)`
+
+    Resets a variable in the global environment to its initial value.
+
+    ```javascript
+    hopp.env.global.reset("baseURL");
+    ```
+
+    ### `hopp.env.global.getInitialRaw(key: string)`
+
+    Retrieves the initial raw value of a global environment variable.
+
+    ```javascript
+    hopp.env.global.getInitialRaw("baseURL");
+    ```
+
+    ### `hopp.env.global.setInitial(key: string, value: string)`
+
+    Sets the initial value of a global environment variable.
+
+    ```javascript
+    hopp.env.global.setInitial("baseURL", "https://httpbin.org");
+    ```
+
+    ## `hopp.request` Namespace
+
+    Request manipulation with immutable properties and dedicated mutation functions.
+
+    #### Read-only Properties
+
+    ### `hopp.request.url`
+
+    The request URL as a string.
+
+    ```javascript
+    const url = hopp.request.url;
+    ```
+
+    ### `hopp.request.method`
+
+    The HTTP method of the request.
+
+    ```javascript
+    const method = hopp.request.method;
+    ```
+
+    ### `hopp.request.params`
+
+    The query parameters of the request.
+
+    ```javascript
+    const params = hopp.request.params;
+    ```
+
+    ### `hopp.request.headers`
+
+    The headers of the request.
+
+    ```javascript
+    const headers = hopp.request.headers;
+    ```
+
+    ### `hopp.request.body`
+
+    The body of the request.
+
+    ```javascript
+    const body = hopp.request.body;
+    ```
+
+    ### `hopp.request.auth`
+
+    The authentication configuration of the request.
+
+    ```javascript
+    const auth = hopp.request.auth;
+    ```
+
+    #### Mutation Functions (Pre-request Phase Only)
+
+    ### `hopp.request.setUrl(url: string)`
+
+    Sets the request URL.
+
+    ```javascript
+    hopp.request.setUrl("https://api.example.com/users");
+    ```
+
+    ### `hopp.request.setMethod(method: string)`
+
+    Sets the HTTP method of the request.
+
+    ```javascript
+    hopp.request.setMethod("POST");
+    ```
+
+    ### `hopp.request.setHeader(name: string, value: string)`
+
+    Sets a header on the request.
+
+    ```javascript
+    hopp.request.setHeader("Authorization", "Bearer token");
+    ```
+
+    ### `hopp.request.setHeaders(headers: HoppRESTHeader[])`
+
+    Sets multiple headers on the request.
+
+    ```javascript
+    hopp.request.setHeaders([{ key: "Content-Type", value: "application/json" }]);
+    ```
+
+    ### `hopp.request.removeHeader(name: string)`
+
+    Removes a header from the request.
+
+    ```javascript
+    hopp.request.removeHeader("Authorization");
+    ```
+
+    ### `hopp.request.setParam(name: string, value: string)`
+
+    Sets a query parameter on the request.
+
+    ```javascript
+    hopp.request.setParam("userId", "123");
+    ```
+
+    ### `hopp.request.setParams(params: HoppRESTParam[])`
+
+    Sets multiple query parameters on the request.
+
+    ```javascript
+    hopp.request.setParams([{ key: "userId", value: "123" }]);
+    ```
+
+    ### `hopp.request.removeParam(name: string)`
+
+    Removes a query parameter from the request.
+
+    ```javascript
+    hopp.request.removeParam("userId");
+    ```
+
+    ### `hopp.request.setBody(body: Partial<HoppRESTReqBody>)`
+
+    Sets the body of the request.
+
+    ```javascript
+    hopp.request.setBody({ body: '{"key": "value"}' });
+    ```
+
+    ### `hopp.request.setAuth(auth: Partial<HoppRESTAuth>)`
+
+    Sets the authentication for the request.
+
+    ```javascript
+    hopp.request.setAuth({ authType: "bearer", token: "token" });
+    ```
+
+    #### Request Variables
+
+    ### `hopp.request.variables.get(key: string)`
+
+    Retrieves the value of a request variable.
+
+    ```javascript
+    const value = hopp.request.variables.get("varName");
+    ```
+
+    ### `hopp.request.variables.set(key: string, value: string)`
+
+    Sets the value of a request variable.
+
+    ```javascript
+    hopp.request.variables.set("varName", "value");
+    ```
+
+    > Please note that only updates to request variables get persisted and reflected in the UI while the remaining are specific to the session.
+
+    ## `hopp.response` Namespace
+
+    Response access with multiple data formats and comprehensive metadata.
+
+    #### Response Metadata
+
+    ### `hopp.response.statusCode`
+
+    The HTTP status code of the response.
+
+    ```javascript
+    const status = hopp.response.statusCode;
+    ```
+
+    ### `hopp.response.statusText`
+
+    The status text of the response.
+
+    ```javascript
+    const statusText = hopp.response.statusText;
+    ```
+
+    ### `hopp.response.headers`
+
+    The headers of the response.
+
+    ```javascript
+    const headers = hopp.response.headers;
+    ```
+
+    ### `hopp.response.responseTime`
+
+    The response time in milliseconds.
+
+    ```javascript
+    const time = hopp.response.responseTime;
+    ```
+
+    ### Response Body Access Methods
+
+    ### `hopp.response.body.asJSON()`
+
+    Parses the response body as JSON.
+
+    ```javascript
+    const data = hopp.response.body.asJSON();
+    ```
+
+    ### `hopp.response.body.asText()`
+
+    Returns the response body as text.
+
+    ```javascript
+    const text = hopp.response.body.asText();
+    ```
+
+    ### `hopp.response.body.bytes()`
+
+    Returns the response body as a Uint8Array.
+
+    ```javascript
+    const bytes = hopp.response.body.bytes();
+    ```
+
+    ## `hopp.cookies` Namespace
+
+    Domain-aware cookie management with comprehensive CRUD operations.
+
+    ### `hopp.cookies.get(domain: string, cookieName: string)`
+
+    Retrieves a cookie by domain and name.
+
+    ```javascript
+    const cookie = hopp.cookies.get("example.com", "sessionId");
+    ```
+
+    ### `hopp.cookies.set(domain: string, cookie: Cookie)`
+
+    Sets a cookie for a domain.
+
+    ```javascript
+    hopp.cookies.set("example.com", {
+      name: "session_id",
+      value: "abc123",
+      domain: "api.example.com",
+      path: "/api",
+      expires: new Date(Date.now() + 86400000).toISOString(), // 24 hours from now
+      maxAge: 86400, // 24 hours in seconds
+      httpOnly: true,
+      secure: true,
+      sameSite: "Lax",
+    });
+    ```
+
+    ### `hopp.cookies.has(domain: string, cookieName: string)`
+
+    Checks if a cookie exists for a domain.
+
+    ```javascript
+    const exists = hopp.cookies.has("example.com", "sessionId");
+    ```
+
+    ### `hopp.cookies.getAll(domain: string)`
+
+    Retrieves all cookies for a domain.
+
+    ```javascript
+    const cookies = hopp.cookies.getAll("example.com");
+    ```
+
+    ### `hopp.cookies.delete(domain: string, cookieName: string)`
+
+    Deletes a cookie for a domain.
+
+    ```javascript
+    hopp.cookies.delete("example.com", "sessionId");
+    ```
+
+    ### `hopp.cookies.clear(domain: string)`
+
+    Clears all cookies for a domain.
+
+    ```javascript
+    hopp.cookies.clear("example.com");
+    ```
+
+    ## `hopp.test` and `hopp.expect` Testing Framework
+
+    Comprehensive testing API with custom assertions and Chai.js-powered BDD assertions for advanced API testing.
+
+    ### `hopp.test(testName: string, testFunction: () => void)`
+
+    Creates a group of tests with a name.
+
+    ```javascript
+    hopp.test("API Tests", () => {
+      hopp.expect(1).toBe(1);
+    });
+    ```
+
+    ### `hopp.expect(actual: any)`
+
+    Returns an expectation object for assertions. API Lab extends the testing framework with comprehensive Chai.js BDD assertion support, enabling advanced testing patterns with 50+ assertion methods.
+
+    ```javascript
+    hopp.expect(value).toBe(expected);
+    ```
+
+    #### Basic Custom Assertions
+
+    ### `hopp.expect(value).toBe(expected: any)`
+
+    Tests for exact equality.
+
+    ```javascript
+    hopp.expect(1).toBe(1);
+    ```
+
+    ### `hopp.expect(value).toBeType(type: string)`
+
+    Tests for type equality.
+
+    ```javascript
+    hopp.expect("hello").toBeType("string");
+    ```
+
+    ### `hopp.expect(value).toHaveLength(number: number)`
+
+    Tests that a value has a specific length.
+
+    ```javascript
+    hopp.expect([1,2,3]).toHaveLength(3);
+    ```
+
+    ### `hopp.expect(value).toInclude(item: any)`
+
+    Tests that a value includes an item.
+
+    ```javascript
+    hopp.expect([1,2,3]).toInclude(2);
+    ```
+
+    #### HTTP Status Code Level Assertions
+
+    ### `hopp.expect(statusCode).toBeLevel2xx()`
+
+    Tests that the status code is in the 2xx range.
+
+    ```javascript
+    hopp.expect(200).toBeLevel2xx();
+    ```
+
+    ### `hopp.expect(statusCode).toBeLevel3xx()`
+
+    Tests that the status code is in the 3xx range.
+
+    ```javascript
+    hopp.expect(302).toBeLevel3xx();
+    ```
+
+    ### `hopp.expect(statusCode).toBeLevel4xx()`
+
+    Tests that the status code is in the 4xx range.
+
+    ```javascript
+    hopp.expect(404).toBeLevel4xx();
+    ```
+
+    ### `hopp.expect(statusCode).toBeLevel5xx()`
+
+    Tests that the status code is in the 5xx range.
+
+    ```javascript
+    hopp.expect(500).toBeLevel5xx();
+    ```
+
+    #### Negation Support
+
+    All assertions support `.not` for negation.
+
+    ```javascript
+    hopp.expect(1).not.toBe(2);
+    hopp.expect("hello").not.toBeType("number");
+    hopp.expect([1,2]).not.toHaveLength(3);
+    hopp.expect([1,2]).not.toInclude(3);
+    hopp.expect(200).not.toBeLevel4xx();
+    ```
+
+    ## Chai.js Assertion Support
+
+    API Lab includes comprehensive Chai.js BDD assertion support through `hopp.expect()` for native scripts and `pm.expect()` for Postman compatibility, enabling advanced testing patterns with 50+ assertion methods.
+
+    ### Type Assertions
+
+    Check value types and instances:
+
+    ```javascript
+    // Basic type checking
+    hopp.test("Type validation", () => {
+      hopp.expect(hopp.response.statusCode).to.be.a('number')
+      hopp.expect(hopp.response.body.asJSON()).to.be.an('object')
+      hopp.expect([1, 2, 3]).to.be.an.instanceOf(Array)
+      hopp.expect(new Date()).to.be.an.instanceOf(Date)
+    })
+    ```
+
+    ### Equality Assertions
+
+    Test for strict and deep equality:
+
+    ```javascript
+    hopp.test("Equality checks", () => {
+      hopp.expect(hopp.response.statusCode).to.equal(200)
+      hopp.expect(hopp.response.body.asJSON()).to.eql({ userId: 1, name: 'John' })
+      hopp.expect(hopp.response.statusCode).to.deep.equal(200)
+    })
+    ```
+
+    ### Property Assertions
+
+    Validate object properties and nested structures:
+
+    ```javascript
+    hopp.test("Response structure", () => {
+      const data = hopp.response.body.asJSON()
+      hopp.expect(data).to.have.property('userId')
+      hopp.expect(data).to.have.own.property('email')
+      hopp.expect(data).to.have.nested.property('profile.name')
+      hopp.expect(data).to.have.all.keys('id', 'name', 'email')
+      hopp.expect(data).to.have.any.keys('id', 'name')
+    })
+    ```
+
+    ### Collection and Array Assertions
+
+    Validate arrays and collections:
+
+    ```javascript
+    hopp.test("Array validation", () => {
+      const tags = hopp.response.body.asJSON().tags
+      hopp.expect(tags).to.have.lengthOf(3)
+      hopp.expect(tags).to.include('nodejs')
+      hopp.expect(tags).to.have.members(['nodejs', 'javascript', 'api'])
+      hopp.expect(tags).to.have.ordered.members(['api', 'javascript', 'nodejs'])
+    })
+    ```
+
+    ### Numeric Comparisons
+
+    Perform numeric comparisons and range checks:
+
+    ```javascript
+    hopp.test("Numeric assertions", () => {
+      const responseTime = hopp.response.responseTime
+      hopp.expect(responseTime).to.be.below(500)
+      hopp.expect(responseTime).to.be.above(0)
+      hopp.expect(responseTime).to.be.within(0, 1000)
+      hopp.expect(3.14159).to.be.closeTo(3.14, 0.01)
+    })
+    ```
+
+    ### String Assertions
+
+    Validate string content and patterns:
+
+    ```javascript
+    hopp.test("String validation", () => {
+      const contentType = hopp.response.headers['content-type']
+      hopp.expect(contentType).to.include('application/json')
+      hopp.expect(contentType).to.match(/^application\/json/)
+      hopp.expect('hello').to.have.lengthOf(5)
+    })
+    ```
+
+    ### Boolean State Assertions
+
+    Check boolean values and states:
+
+    ```javascript
+    hopp.test("Boolean checks", () => {
+      hopp.expect(true).to.be.true
+      hopp.expect(false).to.be.false
+      hopp.expect(1).to.be.ok
+      hopp.expect(null).to.be.null
+      hopp.expect(undefined).to.be.undefined
+      hopp.expect({}).to.exist
+      hopp.expect([]).to.not.be.empty
+    })
+    ```
+
+    ### Complex Assertion Chains
+
+    Combine multiple assertions for comprehensive validation:
+
+    ```javascript
+    hopp.test("Complex validation", () => {
+      const data = hopp.response.body.asJSON()
+      hopp.expect(data)
+        .to.be.an('object')
+        .and.have.property('userId')
+        .that.is.a('number')
+        .and.is.above(0)
+    })
+    ```
+
+    ### Real-World Example: API Pagination
+
+    ```javascript
+    hopp.test("Pagination metadata validation", () => {
+      const data = hopp.response.body.asJSON()
+      
+      // Validate pagination structure
+      hopp.expect(data).to.have.all.keys('items', 'page', 'total', 'hasMore')
+      hopp.expect(data.items).to.be.an.instanceOf(Array)
+      hopp.expect(data.items).to.have.lengthOf.at.most(50)
+      
+      // Validate each item
+      data.items.forEach(item => {
+        hopp.expect(item).to.have.all.keys('id', 'name', 'createdAt')
+        hopp.expect(item.id).to.be.a('string')
+      })
+      
+      // Store next page cursor
+      if (data.hasMore) {
+        hopp.env.active.set('nextPage', String(data.page + 1))
+      }
+    })
+    ```
+
+    ### Complete Assertion Reference
+
+    **Type assertions:**
+    - `.a(type)` / `.an(type)` - Check value type
+    - `.instanceof(constructor)` - Check instance type
+
+    **Equality assertions:**
+    - `.equal(value)` / `.eq(value)` - Strict equality (===)
+    - `.eql(value)` - Deep equality
+
+    **Property assertions:**
+    - `.property(name)` - Has property
+    - `.own.property(name)` - Has own property (not inherited)
+    - `.nested.property(path)` - Has nested property (e.g., 'a.b.c')
+
+    **Collection assertions:**
+    - `.include(value)` / `.contain(value)` - Contains value
+    - `.members(array)` - Has members (order-independent)
+    - `.ordered.members(array)` - Has members in order
+    - `.keys(...keys)` - Has keys
+    - `.lengthOf(n)` - Length equals n
+    - `.lengthOf.at.least(n)` - Minimum length
+    - `.lengthOf.at.most(n)` - Maximum length
+
+    **Comparison assertions:**
+    - `.above(n)` / `.gt(n)` - Greater than
+    - `.below(n)` / `.lt(n)` - Less than
+    - `.at.least(n)` / `.gte(n)` - Greater than or equal
+    - `.at.most(n)` / `.lte(n)` - Less than or equal
+    - `.within(min, max)` - Within range
+    - `.closeTo(expected, delta)` - Approximately equal
+
+    **Boolean assertions:**
+    - `.ok` - Truthy
+    - `.true` - Strictly true
+    - `.false` - Strictly false
+    - `.null` - Strictly null
+    - `.undefined` - Strictly undefined
+    - `.exist` - Not null or undefined
+    - `.empty` - Empty (string, array, object)
+
+    **String assertions:**
+    - `.match(regex)` - Matches regular expression
+    - `.string(substring)` - Contains substring
+
+    **Function assertions:**
+    - `.throw()` / `.throw(ErrorType)` - Throws error
+    - `.respondTo(method)` - Has method
+
+    **Object state assertions:**
+    - `.extensible` - Object.isExtensible()
+    - `.sealed` - Object.isSealed()
+    - `.frozen` - Object.isFrozen()
+
+    **Modifiers:**
+    - `.not` - Negation
+    - `.deep` - Deep comparison
+    - `.own` - Own properties only
+    - `.ordered` - Order matters
+    - `.nested` - Nested property access
+    - `.all` - All items/keys
+    - `.any` - Any items/keys
+    - `.to` / `.be` / `.is` / `.that` / `.and` / `.have` / `.with` - Language chains for readability
+
+    ## `pm` Namespace - Postman Compatibility Layer
+
+    Postman API compatibility for seamless migration with experimental Postman collection import support (v2.0/v2.1). The `pm` namespace provides `pm.expect()` with full Chai.js assertion support for Postman-compatible testing.
+
+    <Info>
+      **Experimental Script Import:** When importing Postman collections, API Lab can now import pre-request scripts and test scripts (experimental feature requiring user consent). This enables you to migrate your existing Postman workflows including their scripting logic.
+    </Info>
+
+    ### Core APIs
+
+    ```javascript
+    // Environment and variable management
+    pm.environment.get(key: string): string | null
+    pm.environment.set(key: string, value: string): void
+    pm.environment.unset(key: string): void
+    pm.environment.has(key: string): boolean
+
+    pm.globals.get(key: string): string | null
+    pm.globals.set(key: string, value: string): void
+    pm.globals.unset(key: string): void
+    pm.globals.has(key: string): boolean
+
+    pm.variables.get(key: string): string | null
+    pm.variables.set(key: string, value: string): void
+    pm.variables.has(key: string): boolean
+    pm.variables.replaceIn(template: string): string
+
+    // Request access (read-only)
+    pm.request.url: URL-like (toString available; additional properties may be limited initially)
+    pm.request.method: string
+    pm.request.headers: HoppRESTHeader[]
+    pm.request.body: HoppRESTReqBody
+    pm.request.auth: HoppRESTAuth
+
+    // Response access (post-request only)
+    pm.response.code: number
+    pm.response.status: string
+    pm.response.responseTime: number  // ms
+    pm.response.json(): Record<string, any>
+    pm.response.text(): string
+    pm.response.headers.get(name: string): string | null
+    pm.response.headers.has(name: string): boolean
+    pm.response.headers.all(): HoppRESTResponseHeader[]
+    pm.response.stream: Uint8Array  // Raw response bytes
+
+    // Testing integration
+    pm.test(testName: string, testFunction: () => void): void
+    pm.expect(actual: any): Expectation
+
+    // Script context information
+    pm.info.eventName: string  // "pre-request" or "post-request"
+    pm.info.requestName: string
+    pm.info.requestId: string
+
+    // Asynchronous requests
+    pm.sendRequest(request: string | Object, callback: (err: any, res: any) => void): void
+    ```
+
+    ### Postman Chai.js Assertions
+
+    Use `pm.expect()` with full Chai.js BDD assertion support for Postman-compatible scripts:
+
+    ```javascript
+    // Basic assertions
+    pm.test("Status code is 200", () => {
+      pm.expect(pm.response.code).to.equal(200)
+      pm.expect(pm.response.responseTime).to.be.below(500)
+    })
+
+    // Response body validation
+    pm.test("Response structure", () => {
+      const jsonData = pm.response.json()
+      pm.expect(jsonData).to.have.property('success')
+      pm.expect(jsonData.success).to.be.true
+      pm.expect(jsonData.data).to.be.an('array')
+    })
+
+    // Array validation
+    pm.test("Array contains expected items", () => {
+      const items = pm.response.json().items
+      pm.expect(items).to.have.lengthOf.at.least(1)
+      pm.expect(items).to.include('apple')
+      pm.expect(items).to.have.members(['apple', 'banana', 'cherry'])
+    })
+
+    // Header validation
+    pm.test("Headers are correct", () => {
+      pm.expect(pm.response.headers.get('content-type')).to.include('application/json')
+    })
+    ```
+
+    ### Postman Response Assertions
+
+    Postman-specific response validation methods:
+
+    ```javascript
+    pm.test("Response validation", () => {
+      pm.expect(pm.response.to.have.status(200))
+      pm.expect(pm.response.to.have.header('content-type'))
+      pm.expect(pm.response.to.have.body())
+      pm.expect(pm.response.to.have.jsonBody())
+      pm.expect(pm.response.to.be.ok) // 2xx status
+      pm.expect(pm.response.to.be.json)
+    })
+
+    pm.test("JSON body validation", () => {
+      pm.expect(pm.response.to.have.jsonBody('userId'))
+      pm.expect(pm.response.to.have.jsonBody('profile.name'))
+      pm.expect(pm.response.to.have.jsonSchema({
+        type: 'object',
+        required: ['userId', 'email'],
+        properties: {
+          userId: { type: 'number' },
+          email: { type: 'string' }
+        }
+      }))
+    })
+    ```
+
+    ### OAuth Token Handling Example
+
+    ```javascript
+    pm.test("OAuth token handling", () => {
+      const response = pm.response.json()
+      const expiresIn = response.expires_in // 3600 seconds
+      const expiryTime = Date.now() + (expiresIn * 1000)
+
+      // Auto-converts number to string
+      pm.environment.set('token_expiry', expiryTime)
+      pm.environment.set('access_token', response.access_token)
+
+      // Verify storage
+      pm.expect(pm.environment.get('access_token')).to.equal(response.access_token)
+    })
+    ```
+
+    ### PM-Specific Response Assertions
+
+    The following assertions are specific to the Postman compatibility layer:
+
+    - `pm.response.to.have.status(code)` - Status code check
+    - `pm.response.to.have.header(name)` - Header existence
+    - `pm.response.to.have.body()` - Has response body
+    - `pm.response.to.have.jsonBody()` - JSON body exists
+    - `pm.response.to.have.jsonBody(path)` - JSON property exists
+    - `pm.response.to.have.jsonSchema(schema)` - Validates JSON schema
+    - `pm.response.to.be.ok` - 2xx status code
+    - `pm.response.to.be.success` - Alias for ok
+    - `pm.response.to.be.json` - JSON content type
+
+    ### Sending Requests
+
+    The `pm.sendRequest` method allows you to send HTTP requests asynchronously from your scripts. This is useful for chaining requests or fetching data from other APIs.
+
+    ```javascript
+    pm.sendRequest("https://postman-echo.com/get", (err, res) => {
+      if (err) {
+        console.log(err);
+      } else {
+        pm.expect(res).to.have.property('code', 200);
+        pm.expect(res).to.have.property('status', 'OK');
+      }
+    });
+    ```
+
+    <Note>
+      It is recommended to use the Agent interceptor on the Web App and the Native interceptor on the Desktop App for `fetch()`, `hopp.fetch()` and `pm.sendRequest()` usages.
+    </Note>
+
+    ### Unsupported Postman Features
+
+    The following Postman features are not currently supported:
+
+    - `pm.visualizer`
+    - `pm.collectionVariables`
+    - `pm.iterationData`
+    - `pm.execution.setNextRequest()`
+    - Legacy patterns like global `responseBody` variable, `require()`, etc.
+
+    <Note>
+      These limitations are documented in error messages when attempting to use unsupported APIs. The supported version range for Postman collections is v2.0/v2.1.
+    </Note>
+
+    ## `pw` Namespace - Legacy Compatibility
+
+    Maintained for backwards compatibility with existing scripts:
+
+    ```javascript
+    // Legacy environment operations
+    pw.env.get(key: string): string | null
+    pw.env.getResolve(key: string): string | null
+    pw.env.set(key: string, value: string): void
+    pw.env.unset(key: string): void
+    pw.env.resolve(template: string): string
+
+    // Legacy response access
+    pw.response.status: number
+    pw.response.body: any
+    pw.response.headers: HoppRESTResponseHeader[]
+
+    // Legacy testing framework
+    pw.test(testName: string, testFunction: () => void): void
+    pw.expect(actual: any): Expectation
+    ```
+
+    ## Cookie Object Structure
+
+    Cookies are represented as objects with the following properties:
+
+    ```javascript
+    type Cookie = {
+      name: string           // Cookie name
+      value: string          // Cookie value
+      domain: string         // Domain the cookie belongs to
+      path: string           // Path scope of the cookie (default: "/")
+      expires?: string       // Expiration date in ISO format, null for session cookies
+      maxAge?: number        // Maximum age in seconds, null if not set
+      httpOnly: boolean      // Whether cookie is HTTP-only
+      secure: boolean        // Whether cookie should only be sent over HTTPS
+      sameSite: 'None' | 'Lax' | 'Strict'  // SameSite attribute
+    }
+    ```
+
+    ## Usage Examples
+
+    ### Environment Management
+
+    ```javascript
+    // Set and get environment variables
+    hopp.env.set("api_token", "abc123")
+    const token = hopp.env.get("api_token")
+
+    // Scope-specific operations
+    hopp.env.global.set("base_url", "https://api.example.com")
+    hopp.env.active.set("user_id", "12345")
+
+    // Reset to initial values
+    hopp.env.reset("api_token")
+    ```
+
+    ### Request Manipulation
+
+    ```javascript
+    // Modify request before sending
+    hopp.request.setHeader("Authorization", "Bearer " + hopp.env.get("token"))
+    hopp.request.setUrl("https://api.example.com/users/" + hopp.env.get("user_id"))
+    hopp.request.setMethod("POST")
+    ```
+
+    ### Response Testing
+
+    ```javascript
+    hopp.test("API responds successfully", () => {
+      hopp.expect(hopp.response.statusCode).toBeLevel2xx()
+      hopp.expect(hopp.response.responseTime).toBe(1000)
+
+      const data = hopp.response.body.asJSON()
+      hopp.expect(data).toBeType("object")
+      hopp.expect(data.users).toHaveLength(10)
+    })
+    ```
+
+    ### Cookie Management
+
+    ```javascript
+    // Set authentication cookie
+    hopp.cookies.set("api.example.com", {
+      name: "session_id",
+      value: "abc123",
+      domain: "api.example.com",
+      path: "/api",
+      expires: new Date(Date.now() + 86400000).toISOString(), // 24 hours from now
+      maxAge: 86400, // 24 hours in seconds
+      httpOnly: true,
+      secure: true,
+      sameSite: "Lax",
+    })
+
+    // Check if cookie exists
+    if (hopp.cookies.has("api.example.com", "session_id")) {
+      const cookie = hopp.cookies.get("api.example.com", "session_id")
+      hopp.env.set("session_token", cookie.value)
+    }
+    ```
+  </Tab>
+  <Tab title="pw [Legacy]">
+    API Lab provides [ECMAScript](https://tc39.es/ecma262) APIs that can be used in writing pre-request scripts and building tests. You can enter your code and run the necessary scripts.
+
+    ## The `pw` object
+
+    The `pw` object provides access to request and response data and variables in your API Lab instance.
+
+    The `pw` object houses the following methods:
+
+    ## `pw.env.set("variable", "value")`
+
+    `pw.env.set()` can be used directly for quick and convenient environment variable definition.
+
+    ```javascript
+    pw.env.set("baseURL", "https://httpbin.org");
+    ```
+
+    Here are some practical examples that show how you can use `pw.env.set()` to encode and decode strings with Base64:
+    ### 1.  `pw.env.set("variable", atob("value"))`
+
+    Use the `atob()` function to **decode a Base64 encoded string** and set it as an environment variable.
+    ```javascript
+    pw.env.set("atob", atob("SG9wcHNjb3RjaA=="));
+    ```
+
+    ### 2.  `pw.env.set("variable", btoa("value"))`
+
+    Use the `btoa()` function to **encode a regular string into Base64** and set it as an environment variable.
+    ```javascript
+    pw.env.set("btoa", btoa("API Lab"));
+    ```
+
+    ## `pw.env.unset("variable")`
+
+    `pw.env.unset()` can be used to remove the value of the variable present in the current active environment
+
+    ```javascript
+    pw.env.unset("baseURL");
+    ```
+
+    ## `pw.env.get("variable")`
+
+    Retrieves the value of the selected environment's variable. Accepts an environment variable as an argument.
+
+    ```javascript
+    pw.env.get("variable");
+    pw.env.get("baseURL");
+    ```
+
+    ## `pw.env.getResolve("variable")`
+
+    Retrieves the value of the selected environment's variable recursively. Accepts an environment variable as an argument.
+
+    ```javascript
+    pw.env.getResolve("variable");
+    pw.env.getResolve("baseURL");
+    ```
+
+    ## `pw.env.resolve("variable")`
+
+    Retrieves the value of the selected environment's variable recursively. Accepts an environment variable string as an argument.
+
+    ```javascript
+    pw.env.resolve("<<variable_1>><<variable_2>>");
+    pw.env.resolve("<<baseURL>><<basePath>>");
+    ```
+
+    ## `pw.expect(value)`
+
+    The expect method returns an expectation object, on which you can call matcher functions.
+
+    The example below calls the matcher function `toBe` on the expectation object that is returned by calling `pw.expect` with the response id, `pw.response.body.id` as an argument.
+
+    Use `pw.expect` directly for quick and convenient testing. Every `pw.expect` statement will generate a line on the test report.
+
+    ```javascript
+    // This test will pass
+    pw.expect(1).toBe(1);
+
+    // This test will fail
+    pw.expect(2).not.toBe(2);
+    ```
+
+    ## `pw.test(name, function)`
+
+    To create a group of tests, with the name as a string and fn as a callback function to write tests associated with the group. The test results will include the given name for better organization.
+
+    Let's wrap expect statements with `pw.test` to the group and describe related statements.
+
+    ```javascript
+    // This will return 4 lines on the test report, grouped under "Arithmetic operations"
+    pw.test("Arithmetic operations", () => {
+      const size = 500 + 500;
+      pw.expect(size).toBe(1000);
+      pw.expect(size - 500).toBe(500);
+      pw.expect(size * 4).toBe(4000);
+      pw.expect(size / 4).toBe(250);
+    });
+    ```
+
+    If neither a `pw.expect` nor a `pw.test` statement is present, no test reports will be generated.
+
+    ```javascript
+    // This will not generate any test reports
+    (99 + 1).toBe(100);
+    ```
+
+    ## `pw.toBe(value)`
+
+    Test for exact equality using `toBe`.
+
+    ```javascript
+    pw.expect(pw.response.body.category).toBe("Sneakers");
+    ```
+
+    `toBe` uses strict equality and is recommended for primitive data types.
+
+    ```javascript
+    // These tests will fail
+    pw.expect("hello").toBe("Hello");
+    pw.expect(5).toBe("5");
+    pw.expect([]).toBe([]);
+    ```
+
+    ## `pw.not()`
+
+    Test for negation by adding `.not` before calling the matcher function.
+
+    ```javascript
+    // These tests will pass
+    pw.expect(true).not.toBe(false);
+    pw.expect(200).not.toBeLevel3xx();
+    ```
+
+    ## `pw.toBeLevelxxx()`
+
+    There are four different matcher functions for quick and convenient testing of the http status code that is returned:
+
+    - `toBeLevel2xx()`
+    - `toBeLevel3xx()`
+    - `toBeLevel4xx()`
+    - `toBeLevel5xx()`
+
+    For example, an argument passed to expect must be within `200` and `299` inclusive to pass `toBeLevel2xx()`.
+
+    ```javascript
+    // These tests will pass
+    pw.expect(204).toBeLevel2xx();
+    pw.expect(308).toBeLevel3xx();
+    pw.expect(404).toBeLevel4xx();
+    pw.expect(503).toBeLevel5xx();
+    ```
+
+    If the argument passed to `expect()` is a non-numeric value, it is first parsed with `parseInt()`.
+
+    ```javascript
+    // This test will pass
+    pw.expect("404").toBeLevel4xx();
+    ```
+
+    ## `pw.toBeType(type)`
+
+    Use `.toBeType(type)` for type checking. The argument for this method should be either of the following `string`, `boolean`, `number`, `object`, `undefined`, `bigint`, `symbol`, or `function`.
+
+    ```javascript
+    // These tests will pass
+    pw.expect(5).toBeType("number");
+    pw.expect("Hello, world!").toBeType("string");
+
+    pw.expect(5).not.toBeType("string");
+    pw.expect("Hello, world!").not.toBeType("number");
+    ```
+
+    ## `pw.toHaveLength(number)`
+
+    Use `.toHaveLength(number)` to check that an object has a `.length` property and it is set to a certain numeric value.
+
+    ```javascript
+    // These expectations will pass
+    pw.expect("hoppscotch").toHaveLength(10);
+    pw.expect("hoppscotch").not.toHaveLength(9);
+
+    pw.expect(["apple", "banana", "coconut"]).toHaveLength(3);
+    pw.expect(["apple", "banana", "coconut"]).not.toHaveLength(4);
+    ```
+
+    ## `pw.toInclude(value)`
+
+    Use `.toInclude(value)` to check that a string/array has a value entry.
+
+    ```javascript
+    // These expectations will pass
+    pw.expect("hoppscotch").toInclude("hopp");
+    pw.expect("hoppscotch").not.toInclude("scotch");
+
+    pw.expect(["apple", "banana", "coconut"]).toInclude("banana");
+    pw.expect(["apple", "banana", "coconut"]).not.toInclude("grape");
+    ```
+
+    ## `pw.response`
+
+    Assert response data by accessing the `pw.response` object.
+
+    ```javascript
+    // This test will pass
+    pw.test("Response is ok", () => {
+      pw.expect(pw.response.status).toBe(200);
+    });
+    ```
+
+    Currently supports the following response values:
+
+    - `status`: -number- The status code as an integer.
+    - `headers`: -object- The response headers.
+    - `body`: -object- the data in the response. In many requests, this is the JSON sent by the server.
+
+    ### Setting Environment Variables from API Responses
+
+    By following these steps, you can store data from one API response and access it later using Environment Variables, making it available for use in subsequent API calls.
+
+    Assume in this example that the payload returns `access_token` and `id_token` as part of a JSON response.
+
+    1. Create Environment Variables without setting their values initially. For example:
+      * `idToken`
+      * `accessToken`
+
+    2. In the "Tests" tab of the first API request (that returns the tokens), add the following code:
+
+    ```javascript
+    const jsonData = pw.response.body; // Save the JSON payload response
+
+    pw.env.set("accessToken", jsonData.access_token); // Set "accessToken" to the value of "access_token" in the response
+
+    pw.env.set("idToken", jsonData.id_token); // Set "idToken" to the value of "id_token" in the response
+    ```
+
+    3. Use these Environment Variables in subsequent API calls within the same collection using the `<<variableName>>` syntax as usual.
+  </Tab>
+</Tabs>
+
+<CardGroup cols={1}>
+  <Card title="Scripts" iconType="light" icon="circle-arrow-right" href="/documentation/getting-started/rest/pre-request-scripts">
+    Read about pre-request scripts.
+  </Card>
+  <Card title="Tests" iconType="light" icon="circle-arrow-right" href="/documentation/getting-started/rest/tests">
+    Read about post-request tests.
+  </Card>
+  <Card title="Environments" iconType="light" icon="circle-arrow-right" href="/documentation/features/environments">
+    Read about environments.
+  </Card>
+</CardGroup>

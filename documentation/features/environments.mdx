@@ -45,15 +45,15 @@ An environment variable can have two types of values:
 
 Click on the ”Environments” icon on the sidebar to create environments.
 
-A variable created in an environment can be used by typing the variable name enclosed in double angle brackets `{{variable}}`
+A variable created in an environment can be used by typing the variable name enclosed in double angle brackets `<<variable>>`
 
 ## Using scripts
 
-You can also create and delete environment variables using scripts by using the `pm` object..
+You can also create and delete environment variables using scripts by using the `pw` object..
 
 ```javascript
-pm.environment.set("variable", "value"); // Creates an environment variable 
-pm.environment.unset("variable"); // Deletes the environment variable
+pw.env.set("variable", "value"); // Creates an environment variable 
+pw.env.unset("variable"); // Deletes the environment variable
 ```
 
 ## Duplicating an environment

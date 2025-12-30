@@ -18,8 +18,6 @@ description: Optimize API Development and Testing Workflows with API Lab using A
 
 API Lab now offers a set of AI-powered features designed to simplify core stages of the API development lifecycle. These include renaming of API requests, generation of structured request payloads, and scripting capabilities for pre-request logic and test cases.
 
-<Warning> These AI features are currently in the `alpha` stage and are exclusively available on [API Lab Cloud](https://app.apilab.work) and our [Desktop app](https://hoppscotch.com/download). They are **NOT** supported in the Self-Hosted Edition at this time. </Warning>
-
 ### Enable AI-powered features
 
 To activate AI-powered features, follow these steps:
@@ -57,3 +55,36 @@ Develop test cases for your API workflow:
 1. Click the **Modify with AI** icon **( .⟡⁺ )** in the **Tests** section.
 2. Specify the test parameters or expected outcomes.
 3. Select **Accept Change** to integrate it into the test script editor for execution.
+
+### Generate Test Cases
+
+Develop can generate test cases for your API with option modal or custom prompt.
+
+1. Click the **Test Cases** tab on toolbar to show test cases tab.
+2. Click the **Generate with AI** icon **( ⟡⁺ )** to open option modal.
+3a. Select **Option Modal** to generate test cases with option modal.
+3b. Select **Custom Prompt** to generate test cases with custom prompt.
+4. Select **Accept Change** to integrate it into the test case editor for execution.
+5. After accepting the test cases, you can run it by clicking the **Run** icon **( ▶️ )**.
+
+<Frame>
+  <img className="block border border-black/5 rounded-md dark:border-white/5" src="/images/apilab/generate-testcases.png" />
+</Frame>
+
+### Generate K6 Script
+
+User can generate k6 script for your API with configure modal or custom prompt.
+
+1. Click the **K6 Script** tab on toolbar to show k6 script tab.
+2. Click the **Configure** icon **( ⚙️ )** to open modal.
+3a. Select **Option** to setup the executor type, load profile, stages,...
+3b. Select **Rules** to add sleep time and correlation rules.
+3c. Select **Advanced** to add custom check and setup the environment variables.
+4. Click **Apply** to generate k6 script.
+5. After generating the K6 Script, user can run on the distributed cloud which provided by [k6.io](https://k6.io)
+
+<Warning> Current API Lab **only** **support** generate K6 script for API requests. We will support the distributed cloud for performance testing in the future. </Warning>
+
+<Frame>
+  <img className="block border border-black/5 rounded-md dark:border-white/5" src="/images/apilab/generate-k6-script.png" />
+</Frame>
